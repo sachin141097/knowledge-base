@@ -1,6 +1,7 @@
 site_name: Knowledge Base
 site_description: Structured technical notes on software engineering, system design, and programming concepts
 site_author: Your Name
+site_url: https://sachin141097.github.io/knowledge-base/
 
 theme:
   name: material
