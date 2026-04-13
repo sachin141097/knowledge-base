@@ -27,7 +27,6 @@ nav:
   - Home: index.md
 
   - Golang:
-      - Test: golang/index.md
       - Basics: golang/basics.md
 
 plugins:
