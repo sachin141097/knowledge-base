@@ -28,6 +28,7 @@ nav:
 
   - Golang:
       - Basics: golang/basics.md
+      - Interfaces: golang/interfaces.md
 
 plugins:
   - search

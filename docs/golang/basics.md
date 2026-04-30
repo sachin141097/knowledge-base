@@ -1,8 +1,3 @@
-- [Struct](#struct)
-	- [Struct Literals](#struct-literals)
-
-
-
 ## Struct
 A struct is an aggregate data type that groups together zero or more named values of arbitary types as a single entity. Each value is called field. The classic example of struct from data processing is the employee record,whose field are unique ID,the employee's name,address,date of birth,position,salary,manager and the like. All of these fields are collected into single entity that can be copied as a unit,passed to functions and returned by them.Stored in an arrays and so on.
 
