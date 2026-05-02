@@ -25,6 +25,8 @@ theme:
 
 nav:
   - Home: index.md
+  - Data Structures:
+      - Heap: Data_Structures/heap.md
 
   - Golang:
       - Basics: golang/basics.md
