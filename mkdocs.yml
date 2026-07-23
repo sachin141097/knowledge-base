@@ -31,6 +31,10 @@ nav:
   - Golang:
       - Basics: golang/basics.md
       - Interfaces: golang/interfaces.md
+  
+  - Spring Boot:
+      - Introduction: spring_boot/intro.md
+      - Beans: spring_boot/beans.md
 
 plugins:
   - search
