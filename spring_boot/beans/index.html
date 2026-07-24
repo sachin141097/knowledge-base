@@ -1,0 +1,2127 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Structured technical notes on software engineering, system design, and programming concepts">
+      
+      
+        <meta name="author" content="Sachin Rana">
+      
+      
+        <link rel="canonical" href="https://sachin141097.github.io/knowledge-base/spring_boot/beans/">
+      
+      
+        <link rel="prev" href="../intro/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Beans - Knowledge Base</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#beans" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Knowledge Base" class="md-header__button md-logo" aria-label="Knowledge Base" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge Base
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Beans
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Knowledge Base" class="md-nav__button md-logo" aria-label="Knowledge Base" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge Base
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Structures
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data Structures
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Data_Structures/heap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Heap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Golang
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../golang/basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../golang/interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interfaces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring Boot
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beans
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beans
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#beans" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Beans
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Beans">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-beans-are-created" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How beans are created
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bean-lifecycle-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bean lifecycle management
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#beanfactory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Beanfactory
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#springcontext-application-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SpringContext (application context)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-nouniquebeandefinition-exception" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is NoUniqueBeanDefinition exception?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#different-ways-to-name-a-bean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Different ways to name a bean
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#giving-multiple-names-to-a-beanbean-aliasing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Giving multiple names to a bean(bean aliasing)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#primary-annotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @Primary annotation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-the-import-annotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using the @Import annotation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-component-annotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using @Component annotation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#postconstruct-annotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @PostConstruct annotation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="@PostConstruct annotation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#when-is-postconstruct-used" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When is @PostConstruct used?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-does-postconstruct-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When does @PostConstruct run?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#predestroy-annotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @PreDestroy annotation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="@PreDestroy annotation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#when-is-predestroy-used" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When is @PreDestroy used?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-does-predestroy-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When does @PreDestroy run?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#difference-between-bean-and-component" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Difference between @Bean and @Component
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layers-in-backend-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layers in backend application
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Layers in backend application">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#controllerpresentation-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Controller/Presentation layer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#servicebusiness-logic-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Service/Business logic layer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repositorydata-access-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository/Data Access layer
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spring-stereotype-annotations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spring stereotype annotations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bean-wiring-inside-spring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bean wiring inside spring
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bean wiring inside spring">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#no-wiring-scenario-inside-spring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        No wiring scenario inside spring
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wiring-using-method-call" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wiring using method call
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wiring-beans-using-method-params" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wiring beans using method params
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-autowiring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is AutoWiring?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What is AutoWiring?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ways-to-autowire-in-spring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ways to Autowire in Spring
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autowiring-using-field-injection-autowired-on-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autowiring using field injection (@AutoWired on field)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autowiring-using-the-setter-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autowiring using the setter injection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autowiring-using-constructor-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autowiring using constructor injection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#circular-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Circular dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#primary-annotation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @Primary annotation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qualifier-annotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @Qualifier annotation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#primary-vs-qualifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @Primary vs @Qualifier
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#beans" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Beans
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Beans">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-beans-are-created" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How beans are created
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bean-lifecycle-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bean lifecycle management
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#beanfactory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Beanfactory
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#springcontext-application-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SpringContext (application context)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-nouniquebeandefinition-exception" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is NoUniqueBeanDefinition exception?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#different-ways-to-name-a-bean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Different ways to name a bean
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#giving-multiple-names-to-a-beanbean-aliasing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Giving multiple names to a bean(bean aliasing)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#primary-annotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @Primary annotation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-the-import-annotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using the @Import annotation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-component-annotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using @Component annotation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#postconstruct-annotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @PostConstruct annotation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="@PostConstruct annotation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#when-is-postconstruct-used" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When is @PostConstruct used?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-does-postconstruct-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When does @PostConstruct run?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#predestroy-annotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @PreDestroy annotation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="@PreDestroy annotation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#when-is-predestroy-used" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When is @PreDestroy used?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-does-predestroy-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When does @PreDestroy run?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#difference-between-bean-and-component" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Difference between @Bean and @Component
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#layers-in-backend-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Layers in backend application
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Layers in backend application">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#controllerpresentation-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Controller/Presentation layer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#servicebusiness-logic-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Service/Business logic layer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repositorydata-access-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repository/Data Access layer
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spring-stereotype-annotations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spring stereotype annotations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bean-wiring-inside-spring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bean wiring inside spring
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Bean wiring inside spring">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#no-wiring-scenario-inside-spring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        No wiring scenario inside spring
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wiring-using-method-call" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wiring using method call
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wiring-beans-using-method-params" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wiring beans using method params
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-autowiring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is AutoWiring?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What is AutoWiring?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ways-to-autowire-in-spring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ways to Autowire in Spring
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autowiring-using-field-injection-autowired-on-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autowiring using field injection (@AutoWired on field)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autowiring-using-the-setter-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autowiring using the setter injection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autowiring-using-constructor-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autowiring using constructor injection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#circular-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Circular dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#primary-annotation_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @Primary annotation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qualifier-annotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @Qualifier annotation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#primary-vs-qualifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @Primary vs @Qualifier
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Beans</h1>
+
+<h2 id="beans">Beans<a class="headerlink" href="#beans" title="Permanent link">&para;</a></h2>
+<p>A spring bean is normal java class that is instantiated and managed by the Spring IoC container.</p>
+<h3 id="how-beans-are-created">How beans are created<a class="headerlink" href="#how-beans-are-created" title="Permanent link">&para;</a></h3>
+<p>Beans are instantiated by the container based on the configuration metadata developer provides which can be using
+- XML configuration(Legacy approach)
+- Annotations (@Component, @Service)
+- Java based configurations (via @Configuration and @Bean methods)</p>
+<h3 id="bean-lifecycle-management">Bean lifecycle management<a class="headerlink" href="#bean-lifecycle-management" title="Permanent link">&para;</a></h3>
+<p>The spring IoC container manages entire lifecycle of bean including its creation,initialization,scope and destruction</p>
+<p>It also ensures any required dependencies are injected into bean as needed</p>
+<h2 id="beanfactory">Beanfactory<a class="headerlink" href="#beanfactory" title="Permanent link">&para;</a></h2>
+<p>The IoC container is represented by the beanfactory interface which provides the basic functionalities for managing beans.
+Suitable for lightweight applications where performance is critical and fewer features are needed</p>
+<h2 id="springcontext-application-context">SpringContext (application context)<a class="headerlink" href="#springcontext-application-context" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Extends beanfactory</li>
+<li>Adds enterprise features<ul>
+<li>i18n support</li>
+<li>Application events: publish/listen to events inside spring</li>
+<li>Resource loading: Read resources from classpath,filesystem,URL</li>
+<li>Environment and profiles</li>
+<li>Autoscan and annotations</li>
+<li>AOP support</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nd">@Configuration</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProjectConfig</span><span class="p">{</span>
+
+<span class="nd">@Bean</span>
+<span class="n">Parrot</span><span class="w"> </span><span class="nf">parrot</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">p</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">Parrot</span><span class="p">();</span>
+<span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;koko&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">p</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nd">@Bean</span>
+<span class="n">String</span><span class="w"> </span><span class="nf">hello</span><span class="p">(){</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;hello&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nd">@Bean</span>
+<span class="n">Integer</span><span class="w"> </span><span class="nf">ten</span><span class="p">(){</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Main</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="n">args</span><span class="p">){</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">context</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">AnnotationConfigApplicationContext</span><span class="p">(</span><span class="n">ProjectConfig</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Parrot</span><span class="w"> </span><span class="n">p</span><span class="o">=</span><span class="n">context</span><span class="p">.</span><span class="na">getBean</span><span class="p">(</span><span class="n">Parrot</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="o">=</span><span class="n">context</span><span class="p">.</span><span class="na">getBean</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Integer</span><span class="w"> </span><span class="n">n</span><span class="o">=</span><span class="n">context</span><span class="p">.</span><span class="na">getBean</span><span class="p">(</span><span class="n">Integer</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Running the app now, the values of the three beans will be printed in the console, as shown in the next code snippet.</p>
+<div class="highlight"><pre><span></span><code>koko
+hello
+<span class="m">10</span>
+</code></pre></div>
+<p>When we create an java object with new() operator directly as shown below then your Spring Context/IoC container will not have any clue of the object</p>
+<div class="highlight"><pre><span></span><code><span class="n">Vehicle</span><span class="w"> </span><span class="n">v</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">Vehicle</span><span class="p">();</span>
+</code></pre></div>
+<p>@Configuration is a Spring annotation used to mark class as a source of bean definitions
+@Bean annotation lets Spring know that it needs to call this method when it initialises its context  and adds returned object/value to the spring IoC container</p>
+<p>Java best practice is to put verbs in method names because method generally represent actions but for methods we use to add beans in the Spring Context we don't follow this convention</p>
+<h2 id="what-is-nouniquebeandefinition-exception">What is NoUniqueBeanDefinition exception?<a class="headerlink" href="#what-is-nouniquebeandefinition-exception" title="Permanent link">&para;</a></h2>
+<p>When multiple beans of the same type are defined in the spring context,and we attempt to retrieve bean by type,Spring cannot determine which instance to provide. This ambiguity results in NoUniqueBeanDefinition exception</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@Bean</span>
+<span class="n">Vehicle</span><span class="w"> </span><span class="nf">vehicle1</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">veh</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">Vehicle</span><span class="p">();</span>
+<span class="w">    </span><span class="n">veh</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;Audi&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">veh</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nd">@Bean</span>
+<span class="n">Vehicle</span><span class="w"> </span><span class="nf">vehicle2</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">veh</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">Vehicle</span><span class="p">();</span>
+<span class="w">    </span><span class="n">veh</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;Honda&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">veh</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nd">@Bean</span>
+<span class="n">Vehicle</span><span class="w"> </span><span class="nf">vehicle3</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">veh</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">Vehicle</span><span class="p">();</span>
+<span class="w">    </span><span class="n">veh</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;Ferrari&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">veh</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>To solve this ambiguity problem you need to refer precisely to one of the instance by using Bean's name</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Main</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">){</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">context</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">AnnotationConfigApplicationContext</span><span class="p">(</span><span class="n">ProjectConfig</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Vehicle</span><span class="w"> </span><span class="n">p</span><span class="o">=</span><span class="n">context</span><span class="p">.</span><span class="na">getBean</span><span class="p">(</span><span class="s">&quot;vehicle2&quot;</span><span class="p">,</span><span class="n">Vehicle</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="different-ways-to-name-a-bean">Different ways to name a bean<a class="headerlink" href="#different-ways-to-name-a-bean" title="Permanent link">&para;</a></h2>
+<p>By default spring will consider method name as bean name. But if we have custom requirement to define a separate bean name,then we can use any of the below approaches</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@Bean</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;audiVehicle&quot;</span><span class="p">)</span>
+<span class="n">Vehicle</span><span class="w"> </span><span class="nf">vehicle1</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">veh</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">Vehicle</span><span class="p">();</span>
+<span class="w">    </span><span class="n">veh</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;Audi&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">veh</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nd">@Bean</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s">&quot;hondaVehicle&quot;</span><span class="p">)</span>
+<span class="n">Vehicle</span><span class="w"> </span><span class="nf">vehicle2</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">veh</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">Vehicle</span><span class="p">();</span>
+<span class="w">    </span><span class="n">veh</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;Honda&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">veh</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nd">@Bean</span><span class="p">(</span><span class="s">&quot;ferrariVehicle&quot;</span><span class="p">)</span>
+<span class="n">Vehicle</span><span class="w"> </span><span class="nf">vehicle3</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">veh</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">Vehicle</span><span class="p">();</span>
+<span class="w">    </span><span class="n">veh</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;Ferrari&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">veh</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Main</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">){</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">context</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">AnnotationConfigApplicationContext</span><span class="p">(</span><span class="n">ProjectConfig</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Vehicle</span><span class="w"> </span><span class="n">veh1</span><span class="o">=</span><span class="n">context</span><span class="p">.</span><span class="na">getBean</span><span class="p">(</span><span class="s">&quot;audiVehicle&quot;</span><span class="p">,</span><span class="n">Vehicle</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">veh1</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+<span class="w">        </span><span class="n">Vehicle</span><span class="w"> </span><span class="n">veh2</span><span class="o">=</span><span class="n">context</span><span class="p">.</span><span class="na">getBean</span><span class="p">(</span><span class="s">&quot;hondaVehicle&quot;</span><span class="p">,</span><span class="n">Vehicle</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">veh2</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+<span class="w">        </span><span class="n">Vehicle</span><span class="w"> </span><span class="n">veh3</span><span class="o">=</span><span class="n">context</span><span class="p">.</span><span class="na">getBean</span><span class="p">(</span><span class="s">&quot;ferrariVehicle&quot;</span><span class="p">,</span><span class="n">Vehicle</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">veh3</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Output:
+<div class="highlight"><pre><span></span><code>Audi
+Honda
+Ferrari
+</code></pre></div></p>
+<h2 id="giving-multiple-names-to-a-beanbean-aliasing">Giving multiple names to a bean(bean aliasing)<a class="headerlink" href="#giving-multiple-names-to-a-beanbean-aliasing" title="Permanent link">&para;</a></h2>
+<p>Sometimes you may want single bean to be known by multiple names. This is called bean aliasing. You can define aliases by passing multiple names in the @Bean annotation using a string array. Now the same bean can be accessed by any of these names - audivehicle,audi,myfavvehicle</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@Bean</span><span class="p">({</span><span class="s">&quot;audivehicle&quot;</span><span class="p">,</span><span class="s">&quot;audi&quot;</span><span class="p">,</span><span class="s">&quot;myfavvehicle&quot;</span><span class="p">})</span>
+<span class="n">Vehicle</span><span class="w"> </span><span class="nf">vehicle</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">veh</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">Vehicle</span><span class="p">();</span>
+<span class="w">    </span><span class="n">veh</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;audi&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">veh</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Adding a description to a bean
+Sometimes it is useful to add short description for a bean</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@Bean</span>
+<span class="nd">@Description</span>
+<span class="n">Vehicle</span><span class="w"> </span><span class="nf">vehicle</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">veh</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">Vehicle</span><span class="p">();</span>
+<span class="w">    </span><span class="n">veh</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;Audi&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">veh</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="primary-annotation">@Primary annotation<a class="headerlink" href="#primary-annotation" title="Permanent link">&para;</a></h2>
+<p>When multiple beans of the same type exist in the spring context you can designate one as the default using @Primary annotation</p>
+<p>The Primary bean is the one spring automatically selects when multiple candidates are available and no specific bean name is provided</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@Bean</span>
+<span class="nd">@Primary</span>
+<span class="n">Parrot</span><span class="w"> </span><span class="nf">parrot2</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">p</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">Parrot</span><span class="p">();</span>
+<span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;Miki&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">p</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="using-the-import-annotation">Using the @Import annotation<a class="headerlink" href="#using-the-import-annotation" title="Permanent link">&para;</a></h2>
+<p>@Import allows one @Configuration class to include bean definitions from another configuration class. It helps organise and reuse configurations easily. ConfigB automatically imports all beans from ConfigA</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@Configuration</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ConfigA</span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="nf">a</span><span class="p">(){</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">A</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><div class="highlight"><pre><span></span><code><span class="nd">@Configuration</span>
+<span class="nd">@Import</span><span class="p">(</span><span class="n">ConfigA</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ConfigB</span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="nf">b</span><span class="p">(){</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">B</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+It is also possible to import multiple config classes at a time
+ex: @Import({ConfigA.class,ConfigB.class})</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="n">args</span><span class="p">){</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">ctx</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">AnnotationConfigApplicationContext</span><span class="p">(</span><span class="n">ConfigB</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="w">    </span><span class="n">A</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="n">ctx</span><span class="p">.</span><span class="na">getBean</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="w">    </span><span class="n">B</span><span class="w"> </span><span class="n">b</span><span class="o">=</span><span class="n">ctx</span><span class="p">.</span><span class="na">getBean</span><span class="p">(</span><span class="n">B</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="using-component-annotation">Using @Component annotation<a class="headerlink" href="#using-component-annotation" title="Permanent link">&para;</a></h2>
+<p>@Component is one of the most commonly used stereotype annotations in spring. It simplifies process of creating and registering beans in spring context with minimal code compared to @Bean method. By applying @Component to a class spring automaticaly detects and manages it as a spring bean</p>
+<p>To ensure Spring scans and registers these annotated classes you can use @ComponentScan annotation over a configuration class</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.example.beans</span><span class="p">;</span>
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Vehicle</span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//other code</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nd">@Configuration</span>
+<span class="nd">@ComponentScan</span><span class="p">(</span><span class="n">basePackages</span><span class="o">=</span><span class="s">&quot;com.example.beans&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProjectConfig</span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//other code</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="postconstruct-annotation">@PostConstruct annotation<a class="headerlink" href="#postconstruct-annotation" title="Permanent link">&para;</a></h2>
+<p>@PostConstruct is a Spring annotation used to run method automatically after spring bean is created and its dependencies are injected</p>
+<h3 id="when-is-postconstruct-used">When is @PostConstruct used?<a class="headerlink" href="#when-is-postconstruct-used" title="Permanent link">&para;</a></h3>
+<ul>
+<li>To perform setup logic when a bean is created</li>
+<li>To load data,setup default values and execute startup logic</li>
+<li>To initialise resource after dependency injection</li>
+</ul>
+<h3 id="when-does-postconstruct-run">When does @PostConstruct run?<a class="headerlink" href="#when-does-postconstruct-run" title="Permanent link">&para;</a></h3>
+<ul>
+<li>It runs after the constructor after all dependencies are injected</li>
+<li>It runs only once in bean's lifecycle</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Vehicle</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="nd">@PostConstruct</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">initialize</span><span class="p">(){</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="o">=</span><span class="s">&quot;Honda&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>Spring creates vehicle bean when application starts</li>
+<li>Before using the bean it calls initalize method automatically</li>
+<li>This is useful for setting up initial data or configurations</li>
+</ul>
+<h2 id="predestroy-annotation">@PreDestroy annotation<a class="headerlink" href="#predestroy-annotation" title="Permanent link">&para;</a></h2>
+<p>@PreDestroy is a annotation used to run a method automatically before spring bean is destroyed</p>
+<h3 id="when-is-predestroy-used">When is @PreDestroy used?<a class="headerlink" href="#when-is-predestroy-used" title="Permanent link">&para;</a></h3>
+<ul>
+<li>To perform cleanup logic before bean is destroyed</li>
+<li>To close resources such as database connections,file handles or threads</li>
+<li>To release memory or stop background tasks</li>
+<li>To log or notify that bean is being shutdown</li>
+</ul>
+<h3 id="when-does-predestroy-run">When does @PreDestroy run?<a class="headerlink" href="#when-does-predestroy-run" title="Permanent link">&para;</a></h3>
+<ul>
+<li>It runs just before the Spring container destroys the bean</li>
+<li>It is called after the application context is closed</li>
+<li>It runs only once in bean's lifecycle</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Vehicle</span><span class="p">{</span>
+
+<span class="nd">@PreDestroy</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">destroy</span><span class="p">(){</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Vehicle destroyed&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="difference-between-bean-and-component">Difference between @Bean and @Component<a class="headerlink" href="#difference-between-bean-and-component" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Bean</th>
+<th>Component</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>One or more instances of a class can be added to spring context</td>
+<td>Only one instance of a class can be added to spring context</td>
+</tr>
+<tr>
+<td>We can create an object instance of any type of class including present inside library like String etc</td>
+<td>We can create an object instance for application class only which are created by dev team</td>
+</tr>
+<tr>
+<td>Usually we need to write more code like separate methods to create beans instances</td>
+<td>Bean instances can be created with very less code like using @Component on top of the class</td>
+</tr>
+<tr>
+<td>Developer will have full control in creating and configuring the bean</td>
+<td>Developer will not have any control in creating and configuring the bean</td>
+</tr>
+<tr>
+<td>Spring framework creates the bean based on the instructions and values provided by the developer</td>
+<td>Spring Framework takes charge of creating the bean and post that developer will have access to it</td>
+</tr>
+</tbody>
+</table>
+<h2 id="layers-in-backend-application">Layers in backend application<a class="headerlink" href="#layers-in-backend-application" title="Permanent link">&para;</a></h2>
+<h3 id="controllerpresentation-layer">Controller/Presentation layer<a class="headerlink" href="#controllerpresentation-layer" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Receives requests from the client (e.g. frotnend,mobiile app,postman)</li>
+<li>Calls the service layer for business logic</li>
+<li>Returns responses (usually JSON or XML)</li>
+</ul>
+<h3 id="servicebusiness-logic-layer">Service/Business logic layer<a class="headerlink" href="#servicebusiness-logic-layer" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Implements business rules,validations and transformations</li>
+<li>Calls the repositories to fetch or store data</li>
+<li>Handles transaction management if required</li>
+</ul>
+<h3 id="repositorydata-access-layer">Repository/Data Access layer<a class="headerlink" href="#repositorydata-access-layer" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Handles data persistence (CRUD operations)</li>
+<li>Uses Spring data JPA or JDBC to interact with databases</li>
+<li>Performs queries using JPQL or native SQL</li>
+</ul>
+<h2 id="spring-stereotype-annotations">Spring stereotype annotations<a class="headerlink" href="#spring-stereotype-annotations" title="Permanent link">&para;</a></h2>
+<p>Special annotations that automatically registers spring beans in the application context. These annotations help simplify bean creation and management</p>
+<p>@Component-&gt; Generic bean (used for any class)</p>
+<p>@Service -&gt; Business logic layer</p>
+<p>@Repository -&gt; Data Access layer</p>
+<p>@Controller -&gt; handles incoming web requests in spring MVC</p>
+<p>@RestController -&gt; Simplified @Controller,returns JSON responses to build REST APIs</p>
+<p>Use @ComponentScan to enable automatic scanning of these annotations</p>
+<h2 id="bean-wiring-inside-spring">Bean wiring inside spring<a class="headerlink" href="#bean-wiring-inside-spring" title="Permanent link">&para;</a></h2>
+<p>In java web applications objects often delegates task to other objects creating dependency between them. Similarly in Spring when we define multiple beans,some beans may rely on others to function correctly. Bean wiring is the process of connecting these dependent beans within spring IoC container</p>
+<h3 id="no-wiring-scenario-inside-spring">No wiring scenario inside spring<a class="headerlink" href="#no-wiring-scenario-inside-spring" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Person</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">Vehicle</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Vehicle</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nd">@Bean</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">Vehicle</span><span class="w"> </span><span class="nf">vehicle</span><span class="p">(){</span>
+<span class="w">    </span><span class="n">Vehicle</span><span class="w"> </span><span class="n">vehicle</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">Vehicle</span><span class="p">();</span>
+<span class="w">    </span><span class="n">vehicle</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;Toyota&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">vehicle</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nd">@Bean</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">Person</span><span class="w"> </span><span class="nf">person</span><span class="p">(){</span>
+<span class="w">    </span><span class="n">Person</span><span class="w"> </span><span class="n">person</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">();</span>
+<span class="w">    </span><span class="n">person</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;Lucy&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">person</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Vehicle doesn't belong to any person. The person and vehicle bean present in context but no relation established</p>
+<h3 id="wiring-using-method-call">Wiring using method call<a class="headerlink" href="#wiring-using-method-call" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nd">@Bean</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">Vehicle</span><span class="w"> </span><span class="nf">vehicle</span><span class="p">(){</span>
+<span class="w">    </span><span class="n">Vehicle</span><span class="w"> </span><span class="n">vehicle</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">Vehicle</span><span class="p">();</span>
+<span class="w">    </span><span class="n">vehicle</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;Toyota&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">vehicle</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nd">@Bean</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">Person</span><span class="w"> </span><span class="nf">person</span><span class="p">(){</span>
+<span class="w">    </span><span class="n">Person</span><span class="w"> </span><span class="n">person</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">();</span>
+<span class="w">    </span><span class="n">person</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;Lucy&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">vehicle</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="n">vehicle</span><span class="p">());</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">person</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="wiring-beans-using-method-params">Wiring beans using method params<a class="headerlink" href="#wiring-beans-using-method-params" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nd">@Bean</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">Vehicle</span><span class="w"> </span><span class="nf">vehicle</span><span class="p">(){</span>
+<span class="w">    </span><span class="n">Vehicle</span><span class="w"> </span><span class="n">vehicle</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">Vehicle</span><span class="p">();</span>
+<span class="w">    </span><span class="n">vehicle</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;Toyota&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">vehicle</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nd">@Bean</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">Person</span><span class="w"> </span><span class="nf">person</span><span class="p">(</span><span class="n">Vehicle</span><span class="w"> </span><span class="n">veh</span><span class="p">){</span>
+<span class="w">    </span><span class="n">Person</span><span class="w"> </span><span class="n">person</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">();</span>
+<span class="w">    </span><span class="n">person</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;Lucy&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">vehicle</span><span class="p">.</span><span class="na">setVehicle</span><span class="p">(</span><span class="n">veh</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">person</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="what-is-autowiring">What is AutoWiring?<a class="headerlink" href="#what-is-autowiring" title="Permanent link">&para;</a></h3>
+<p>Autowiring is a feature in Spring that automatically injects dependencies
+- It eliminates need for manual object creation using new keyword
+- Spring finds the right dependency and injects it automatically</p>
+<h4 id="ways-to-autowire-in-spring">Ways to Autowire in Spring<a class="headerlink" href="#ways-to-autowire-in-spring" title="Permanent link">&para;</a></h4>
+<ul>
+<li>By field injection (@AutoWired on field)</li>
+<li>By Setter injection (@AutoWired on setter method)</li>
+<li>By constructor injection (@AutoWired on constructor)</li>
+</ul>
+<h4 id="autowiring-using-field-injection-autowired-on-field">Autowiring using field injection (@AutoWired on field)<a class="headerlink" href="#autowiring-using-field-injection-autowired-on-field" title="Permanent link">&para;</a></h4>
+<p>Spring looks for matching bean type and injects it automatically
+<div class="highlight"><pre><span></span><code><span class="nd">@Component</span>
+<span class="kd">class</span> <span class="nc">Engine</span><span class="p">{}</span>
+
+<span class="nd">@Component</span>
+<span class="kd">class</span> <span class="nc">Car</span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@AutoWired</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Engine</span><span class="w"> </span><span class="n">engine</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<ul>
+<li>
+<p>Hard to unit test</p>
+<ul>
+<li>You cannot easily create objects and set dependencies yourself</li>
+<li>Because the field is private and has no setter you must rely on spring</li>
+<li>In tests it becomes difficult to mock replace dependencies</li>
+</ul>
+</li>
+<li>
+<p>No way to make the field final</p>
+<ul>
+<li>If Spring injects via field you cannot write<ul>
+<li><code>private final AccountService accountService;</code></li>
+</ul>
+</li>
+<li>So,you cannot gurantee dependency is always available.It may be accidentally changed later</li>
+</ul>
+</li>
+<li>Can create NullPointerExceptions<ul>
+<li>If spring fails to inject,the object can still be created,and you might get nullpointerexception at runtime</li>
+</ul>
+</li>
+</ul>
+<p>@Autowired(required=false) will help to avoid the NoSuchBeanDefinitionException if the bean is not available during autowiring process</p>
+<h4 id="autowiring-using-the-setter-injection">Autowiring using the setter injection<a class="headerlink" href="#autowiring-using-the-setter-injection" title="Permanent link">&para;</a></h4>
+<p>Spring injects dependency using the setter method. Useful when dependency is optional
+<div class="highlight"><pre><span></span><code><span class="nd">@Component</span>
+<span class="kd">class</span> <span class="nc">Engine</span><span class="p">{}</span>
+
+<span class="nd">@Component</span>
+<span class="kd">class</span> <span class="nc">Car</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Engine</span><span class="w"> </span><span class="n">engine</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@AutoWired</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Car</span><span class="p">(</span><span class="n">Engine</span><span class="w"> </span><span class="n">engine</span><span class="p">){</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">engine</span><span class="o">=</span><span class="n">engine</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<ul>
+<li>Has same drawbacks as field injection</li>
+<li>Less commonly used compared to constructor injection</li>
+</ul>
+<h4 id="autowiring-using-constructor-injection">Autowiring using constructor injection<a class="headerlink" href="#autowiring-using-constructor-injection" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Preferred approach in modern spring applications</li>
+<li>Works well with immutability and unit testing
+<div class="highlight"><pre><span></span><code><span class="nd">@Component</span>
+<span class="kd">class</span> <span class="nc">Engine</span><span class="p">{}</span>
+
+<span class="nd">@Component</span>
+<span class="kd">class</span> <span class="nc">Car</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Engine</span><span class="w"> </span><span class="n">engine</span><span class="p">;</span>
+<span class="w">    </span><span class="nd">@AutoWired</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setEngine</span><span class="p">(</span><span class="n">Engine</span><span class="w"> </span><span class="n">engine</span><span class="p">){</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">engine</span><span class="o">=</span><span class="n">engine</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+<h4 id="circular-dependencies">Circular dependencies<a class="headerlink" href="#circular-dependencies" title="Permanent link">&para;</a></h4>
+<p>A circular dependency occurs when two or more beans depend on each other directly or indirectly. Spring cannot resolve dependencies and throws an UnSatisfiedDependencyException.</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@Component</span>
+<span class="kd">class</span> <span class="nc">Car</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Engine</span><span class="w"> </span><span class="n">eng</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@AutoWired</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Car</span><span class="p">(</span><span class="n">Engine</span><span class="w"> </span><span class="n">engine</span><span class="p">){</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">engine</span><span class="o">=</span><span class="n">engine</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nd">@Component</span>
+<span class="kd">class</span> <span class="nc">Engine</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Car</span><span class="w"> </span><span class="n">car</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@AutoWired</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Engine</span><span class="p">(</span><span class="n">Car</span><span class="w"> </span><span class="n">car</span><span class="p">){</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">car</span><span class="o">=</span><span class="n">car</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="primary-annotation_1">@Primary annotation<a class="headerlink" href="#primary-annotation_1" title="Permanent link">&para;</a></h4>
+<p>When multiple beans match for autowiring by type @Primary gives one bean higher preference so it's chosen automatically as the default</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@Component</span><span class="p">(</span><span class="s">&quot;petrolEngine&quot;</span><span class="p">)</span>
+<span class="kd">class</span> <span class="nc">PetrolEngine</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Engine</span><span class="p">{}</span>
+
+<span class="nd">@Component</span><span class="p">(</span><span class="s">&quot;dieselEngine&quot;</span><span class="p">)</span>
+<span class="nd">@Primary</span>
+<span class="kd">class</span> <span class="nc">DieselEngine</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Engine</span><span class="p">{}</span>
+
+<span class="nd">@Component</span>
+<span class="kd">class</span> <span class="nc">Car</span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@AutoWired</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Engine</span><span class="w"> </span><span class="n">engine</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="qualifier-annotation">@Qualifier annotation<a class="headerlink" href="#qualifier-annotation" title="Permanent link">&para;</a></h4>
+<p>If multiple beans of the same type exist,we use @Qualifier to specify the exact bean. </p>
+<div class="highlight"><pre><span></span><code><span class="nd">@Component</span><span class="p">(</span><span class="s">&quot;petrolEngine&quot;</span><span class="p">)</span>
+<span class="kd">class</span> <span class="nc">PetrolEngine</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Engine</span><span class="p">{}</span>
+
+<span class="nd">@Component</span><span class="p">(</span><span class="s">&quot;dieselEngine&quot;</span><span class="p">)</span>
+<span class="nd">@Primary</span>
+<span class="kd">class</span> <span class="nc">DieselEngine</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Engine</span><span class="p">{}</span>
+
+<span class="nd">@Component</span>
+<span class="kd">class</span> <span class="nc">Car</span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@AutoWired</span>
+<span class="w">    </span><span class="nd">@Qualifier</span><span class="p">(</span><span class="s">&quot;dieselEngine&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Engine</span><span class="w"> </span><span class="n">engine</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="primary-vs-qualifier">@Primary vs @Qualifier<a class="headerlink" href="#primary-vs-qualifier" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Annotation</th>
+<th>When to Use?</th>
+<th>How it works</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@Primary</td>
+<td>When you have default bean that should be used most of the time</td>
+<td>Spring automatically selects Primary bean if no specific qualifier is provided</td>
+</tr>
+<tr>
+<td>@Qualifier</td>
+<td>When you need to explicitly specify which bean to use</td>
+<td>Overrides @Primary and allows selecting a specific bean when multiple exist</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "search.highlight", "search.suggest", "content.code.copy", "content.action.edit"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1044 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Structured technical notes on software engineering, system design, and programming concepts">
+      
+      
+        <meta name="author" content="Sachin Rana">
+      
+      
+        <link rel="canonical" href="https://sachin141097.github.io/knowledge-base/spring_boot/intro/">
+      
+      
+        <link rel="prev" href="../../golang/interfaces/">
+      
+      
+        <link rel="next" href="../beans/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Introduction - Knowledge Base</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#why-core-java-alone-isnt-enough-for-web-applications" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Knowledge Base" class="md-header__button md-logo" aria-label="Knowledge Base" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge Base
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introduction
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Knowledge Base" class="md-nav__button md-logo" aria-label="Knowledge Base" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge Base
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Structures
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Data Structures
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Data_Structures/heap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Heap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Golang
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../golang/basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../golang/interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interfaces
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring Boot
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-core-java-alone-isnt-enough-for-web-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Core Java alone isn't enough for web applications
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduction-to-spring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction to Spring
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction to Spring">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-spring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is Spring?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-spring-boot-changed-everything" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How spring boot changed everything
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maven" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Maven
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inversion-of-control-ioc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inversion of Control (IoC)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependency-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependency Injection
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dependency Injection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#advantages-of-di-and-ioc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advantages of DI and IoC
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../beans/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beans
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-core-java-alone-isnt-enough-for-web-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Core Java alone isn't enough for web applications
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduction-to-spring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction to Spring
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction to Spring">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-spring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is Spring?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-spring-boot-changed-everything" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How spring boot changed everything
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maven" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Maven
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inversion-of-control-ioc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inversion of Control (IoC)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependency-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependency Injection
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dependency Injection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#advantages-of-di-and-ioc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advantages of DI and IoC
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Introduction</h1>
+
+<h2 id="why-core-java-alone-isnt-enough-for-web-applications">Why Core Java alone isn't enough for web applications<a class="headerlink" href="#why-core-java-alone-isnt-enough-for-web-applications" title="Permanent link">&para;</a></h2>
+<p><strong>Database connection management</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">Connection</span><span class="w"> </span><span class="n">conn</span><span class="o">=</span><span class="kc">null</span>
+<span class="k">try</span><span class="p">{</span>
+<span class="w">    </span><span class="n">conn</span><span class="o">=</span><span class="n">DriverManager</span><span class="p">.</span><span class="na">getConnection</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">username</span><span class="p">,</span><span class="n">password</span><span class="p">);</span>
+<span class="w">    </span><span class="n">PreparedStatement</span><span class="w"> </span><span class="n">stmt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">conn</span><span class="p">.</span><span class="na">preparedStatement</span><span class="p">(</span><span class="s">&quot;SELECT * FROM products&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ResultSet</span><span class="w"> </span><span class="n">rs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stmt</span><span class="p">.</span><span class="na">executeQuery</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//process results</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="p">(</span><span class="n">SQLException</span><span class="w"> </span><span class="n">e</span><span class="p">){</span>
+<span class="w">    </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">conn</span><span class="o">!=</span><span class="kc">null</span><span class="p">)</span><span class="n">conn</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Every single database operation requires this boilerplate code. If you forgot to close the connection you would have memory leaks. You need to manage connection pools manually</p>
+<p><strong>Object creation and Dependencies</strong>
+<strong>Configuration Management</strong>
+        You need to manually load property files</p>
+<p><strong>Creating REST APIs</strong>
+        With Plain Java you would use servelets. Then configure everything in web.xml,handle url mappings,manage servlet lifecycle</p>
+<p>The core problems with Java alone
+- Too much boilerplate code: You spend more time on plumbing than business logic
+- Manual object management: You are responsible for creating and wiring everything
+- Tight coupling: Hard to test,Hard to maintain
+- Configuration nightmare: XML files everywhere
+- Reinventing the wheel: writing the same patterns over and over</p>
+<h2 id="introduction-to-spring">Introduction to Spring<a class="headerlink" href="#introduction-to-spring" title="Permanent link">&para;</a></h2>
+<h3 id="what-is-spring">What is Spring?<a class="headerlink" href="#what-is-spring" title="Permanent link">&para;</a></h3>
+<p>Spring is a popular java framework for building web applications. It helps developers write clean,modular and testable code</p>
+<p>Provides built in features for handling databases,security,messaging and more</p>
+<h2 id="how-spring-boot-changed-everything">How spring boot changed everything<a class="headerlink" href="#how-spring-boot-changed-everything" title="Permanent link">&para;</a></h2>
+<p>Traditional spring application
+- Configure dispatcher servlet
+- Set up component scanning
+- Configure data source
+- Setup view resolvers
+- Configure server settings</p>
+<p>Spring Boot simplified all of that with
+- Auto configuration: it detects what you have in your project and configures it automatically
+- Embedded servers: No need to deploy Tomcat manually- Just run your app like any Java program</p>
+<h2 id="maven">Maven<a class="headerlink" href="#maven" title="Permanent link">&para;</a></h2>
+<p>Before tools like Maven existed:
+- Developers had to manually search the internet for the jar files
+- Download them one by one
+- Place them inside folder like lib/
+- Add them manually to classpath</p>
+<p>And if one jar depend on 10 more jars?more downloading</p>
+<p>Maven automates all of this</p>
+<p>You simply tell Maven your project's requirements (dependencies) in one file called</p>
+<p>pom.xml (POM- Project Object Model)</p>
+<p>Inside pom.xml you write something like</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
+<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-web<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;version&gt;</span>x.x.x<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>
+<p>Every library has a unique address
+- GroupId: Company/Organisation (like the city)
+- ArtifactId: Project name (like the street)
+- Version: Specific number (like the house number)</p>
+<p>Maven will
+- Search for the library
+- Download it automatically
+- Download all its required library (called transitive dependencies)
+- Keep them in correct classpath
+No manual effort needed</p>
+<p>Maven downloads dependencies from the central place called the Maven Central Repository</p>
+<p>Once downloaded these libraries are stored on your machine in a Maven folder called local repository</p>
+<p>If another project needs the same Jar
+- Maven simply reuses it locally
+- No need to download again</p>
+<p><img alt="" src="/docs/spring_boot/maven_project_structure.png" /></p>
+<p>This standard structure ensures</p>
+<ul>
+<li>Any developer can understand Maven project instantly</li>
+<li>Tools and IDE know exactly where to find things</li>
+</ul>
+<p>Maven is not just dependency manager. It is also build automation tool. It can
+- Compile code
+- Run tests
+- Package jar/war
+- Deploy artifacts
+- Clean old builds</p>
+<p><code>mvn clean</code> Removes old compiled files
+- This deletes target folder
+- To avoid conflicts with older builds
+- To ensure fresh start</p>
+<p><code>mvn validate</code> checks if your project is correctly configured. It checks
+- is pom.xml valid?
+- Are all required fields present
+- Is the project structure correct?
+- Are all necessary plugins available?</p>
+<p><code>mvn compile</code> Compiles our java source code
+This reads files from <code>src/main/java</code> and generates .class files into <code>target/</code></p>
+<p><code>mvn test</code> runs all unit tests</p>
+<p><code>mvn package</code> packages the project into jar or war. Output is generated in the target folder
+(<code>target/myapp-0.0.1.SNAPSHOT.jar</code>)This is the file we can run or deploy</p>
+<p><code>mvn verify</code> It ensures build is ready for final installation or deployment
+It builds your project,tests it and verifies everything is working correctly without actually deploying it</p>
+<p><code>mvn install</code> It compiles-&gt;tests-&gt;packages-&gt;verify then installs the final .jar into local maven repository. This allows other projects on your machine to reuse it</p>
+<h2 id="inversion-of-control-ioc">Inversion of Control (IoC)<a class="headerlink" href="#inversion-of-control-ioc" title="Permanent link">&para;</a></h2>
+<p>Inversion of control (IoC) is a software design principle that defines how objects are created and managed in a program. It doesn't create object itself but outlines way for their creation and dependency management</p>
+<p>With IoC the control flow of the program is reversed,Instead of programmer managing the flow of application,a framework or service takes over this responsibility,ensuring objects and their dependencies are handled automatically</p>
+<ul>
+<li>Normally in java we create objects manually using new keyword</li>
+<li>With IoC spring manages object creation and dependencies automatically</li>
+<li>It reduces manual coding and makes application more flexible</li>
+</ul>
+<h2 id="dependency-injection">Dependency Injection<a class="headerlink" href="#dependency-injection" title="Permanent link">&para;</a></h2>
+<p>It is a design pattern used to implement inversion of control. DI is a way of providing dependencies to a class instead of creating them inside a class. Helps in bringing loose coupling between objects. Spring automatically injects required objects</p>
+<h3 id="advantages-of-di-and-ioc">Advantages of DI and IoC<a class="headerlink" href="#advantages-of-di-and-ioc" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Loose coupling between components</li>
+<li>Minimizes the amount of code</li>
+<li>Makes unit testing easier with different mocks</li>
+<li>Increased system maintainability and module resuability</li>
+<li>Allow concurrent and independent development</li>
+<li>Replacing modules has no side effect on other modules</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "search.highlight", "search.suggest", "content.code.copy", "content.action.edit"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
